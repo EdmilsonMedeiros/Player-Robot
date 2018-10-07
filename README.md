@@ -11,7 +11,7 @@
 
   O **ADMINISTRADOR** pode banir, bloquear usuário e gerar relatórios de uso e acessos.
 
-**REQUISITOS**
+# REQUISITOS
 
   - Cadastrar usuário
   - Tocar música
