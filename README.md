@@ -15,6 +15,8 @@
   - Entregas constantes de 1 funcionalidade por semana todas as quintas-feiras
   
   *Obs.: cada componente do grupo receberá sua fatia da tarefa da semana somado a responsabilidade da entrega dos resultados considerando a data limite. Nenhum dos componentes deve trabalhar de forma isolada, a comunicação deve ser prezada sendo o pricipal pilar do projeto.*
+  
+  *Link com status de cada fase do projeto em planilha: https://docs.google.com/spreadsheets/d/1oZ5DObywOwXKgIdeGfeyy5c4E8-fO6ya02dF86MSDzU/edit?usp=sharing*
 
 **Estória**
 
