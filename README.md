@@ -1,4 +1,8 @@
 # Player-Robot
+  **Colaboradores do projeto:**
+    Edmilson Medeiros
+    Natanael Xavier
+    Bruno Rafael
   Neste projeto vamos desenvolver baseados nos principios básicos da metodologia ágil XP(Extreme Programming) que são:
   
   - Comunicação
