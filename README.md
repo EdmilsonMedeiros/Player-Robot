@@ -1,5 +1,16 @@
 # Player-Robot
-
+  Neste projeto vamos desenvolver baseados nos principios básicos da metodologia ágil XP(Extreme Programming) que são:
+  
+  - Comunicação
+  - Coragem
+  - Feedback
+  - Respeito
+  - Simplicidade
+  
+  Não seguiremos a risca a metodologia, adaptaremos a nossa realidade.
+  **CRONOGRAMA:**
+  - Reúniões semanais todas as quartas-feiras para discutir o que foi e o que será feito
+  - Entregas constantes de 1 funcionalidade por semana todas as quintas-feiras
 
 **Estória**
 
