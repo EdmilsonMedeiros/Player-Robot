@@ -13,6 +13,8 @@
   
   - Reúniões semanais todas as quartas-feiras para discutir o que foi e o que será feito
   - Entregas constantes de 1 funcionalidade por semana todas as quintas-feiras
+  
+  *Obs.: cada componente do grupo receberá sua fatia da tarefa da semana somado a responsabilidade da entrega dos resultados considerando a data limite. Nenhum dos componentes deve trabalhar de forma isolada, a comunicação deve ser prezada sendo o pricipal pilar do projeto.*
 
 **Estória**
 
