@@ -30,3 +30,7 @@
   - Opção de bloqueio
   - Opção de banir
   - Opção relatórios de uso
+
+# O código seguirá o seguinte padrão:
+  - Comentário para cada metodo das classes
+  - Variaveis ultilizando CamelCase (escrever as palavras compostas ou frases, onde cada palavra é iniciada com maiúsculas exceto a 1ª e unidas sem espaços).
