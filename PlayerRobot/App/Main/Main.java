@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
 public class Main extends JFrame {
 
 	private JPanel contentPane;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -25,7 +25,9 @@ public class Main extends JFrame {
 				}
 			}
 		});
+		
 	}
+	
 
 	/**
 	 * Create the frame.
@@ -37,6 +39,7 @@ public class Main extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
 	}
 
 }

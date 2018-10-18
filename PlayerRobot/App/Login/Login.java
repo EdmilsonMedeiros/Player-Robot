@@ -23,6 +23,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
 import java.awt.ComponentOrientation;
 import java.awt.Font;
+import java.awt.Frame;
+
 import javax.swing.JPasswordField;
 
 public class Login {
