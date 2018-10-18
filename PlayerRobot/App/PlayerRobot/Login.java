@@ -78,9 +78,14 @@ public class Login {
 		
 		JButton btnClose = new JButton("");
 		btnClose.setBackground(new Color(63,62,62));
-		btnClose.setIcon(new ImageIcon("C:\\Users\\alunoTI\\Downloads\\PlayerRobot\\PlayerRobot\\Libraries\\img\\fechar.png"));
+		btnClose.setIcon(new ImageIcon(Login.class.getResource("/Libraries/img/fechar.png")));
 		btnClose.setBounds(291, 0, 49, 36);
 		frmPlayerrobot.getContentPane().add(btnClose);
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
 		
 		txtEmail = new JTextField();
 		txtEmail.setFont(txtEmail.getFont().deriveFont(txtEmail.getFont().getStyle() | Font.BOLD));
@@ -94,7 +99,7 @@ public class Login {
 		btnAcessar.setContentAreaFilled(false);
 		btnAcessar.setBorderPainted(false);
 		btnAcessar.setAlignmentX(Component.CENTER_ALIGNMENT);
-		btnAcessar.setIcon(new ImageIcon("C:\\Users\\alunoTI\\Downloads\\PlayerRobot\\PlayerRobot\\Libraries\\img\\btnacessar.png"));
+		btnAcessar.setIcon(new ImageIcon(Login.class.getResource("/Libraries/img/btnacessar.png")));
 		btnAcessar.setBackground(new Color(63,62,62));
 		
 		btnAcessar.addActionListener(new ActionListener() {
@@ -116,8 +121,9 @@ public class Login {
 		
 		frmPlayerrobot.getContentPane().add(btnAcessar);
 		
-		JLabel logo = new JLabel("New label");
-		logo.setIcon(new ImageIcon("C:\\Users\\alunoTI\\Downloads\\PlayerRobot\\PlayerRobot\\Libraries\\img\\body.png"));
+		JLabel logo = new JLabel("");
+		logo.setHorizontalAlignment(SwingConstants.CENTER);
+		logo.setIcon(new ImageIcon(Login.class.getResource("/Libraries/img/body.png")));
 		logo.setBounds(0, 0, 340, 482);
 		frmPlayerrobot.getContentPane().add(logo);
 		
