@@ -1,4 +1,4 @@
-package PlayerRobot;
+package Login;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.Color;
@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
 import Functions.Logar;
-
+import Main.Main;
 import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
 import java.awt.Rectangle;
@@ -108,10 +108,17 @@ public class Login {
 				try {
 					boolean autentica = logar.start(txtEmail.getText(), txtSenha.getText());
 					if(autentica == true) {
+						Main main = new Main();
+						main.setVisible(true);
+						frmPlayerrobot.dispose();
+						
 						System.out.println("Conseguiu!");
 					}
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
+				} catch (Throwable e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		});
