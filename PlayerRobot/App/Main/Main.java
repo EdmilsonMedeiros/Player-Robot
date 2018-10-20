@@ -3,9 +3,12 @@ package Main;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLayer;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.LayerUI;
 
 public class Main extends JFrame {
 
@@ -27,8 +30,6 @@ public class Main extends JFrame {
 		});
 		
 	}
-	
-
 	/**
 	 * Create the frame.
 	 */
