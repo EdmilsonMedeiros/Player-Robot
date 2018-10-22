@@ -7,11 +7,17 @@ public class Usuario {
 	private String nick;
 	private String email;
 	private String nome;
-	private    int telefone;
+	private String telefone;
 	private String lkFoto;
+	
+	//informações seguidoers
+	private String qtdSeguidores;
+	private String qtdSeguindo;
+	
+	
 	//Construtores da Classe
 	public Usuario() {}
-	public Usuario(int id, String nick, String email, String nome, int telefone, String lkFotos) {
+	public Usuario(int id, String nick, String email, String nome, String telefone, String lkFotos) {
 		this.id       = id;
 		this.nick     = nick;
 		this.email    = email;
@@ -45,10 +51,10 @@ public class Usuario {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
-	public void setTelefone(int telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 	public String getLkFoto() {
@@ -57,5 +63,16 @@ public class Usuario {
 	public void setLkFoto(String lkFoto) {
 		this.lkFoto = lkFoto;
 	}
-
+	public String getQtdSeguidores() {
+		return qtdSeguidores;
+	}
+	public void setQtdSeguidores(String qtdSeguidores) {
+		this.qtdSeguidores = qtdSeguidores;
+	}
+	public String getQtdSeguindo() {
+		return qtdSeguindo;
+	}
+	public void setQtdSeguindo(String qtdSeguindo) {
+		this.qtdSeguindo = qtdSeguindo;
+	}
 }

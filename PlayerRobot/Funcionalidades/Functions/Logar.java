@@ -1,4 +1,6 @@
 package Functions;
+import Static.App;
+import Objetos.Usuario;
 import java.net.URL;
 import java.util.HashMap;
 
@@ -18,17 +20,36 @@ public class Logar {
 			parametros.put("email", email);
 			parametros.put("senha", senha);
 			
-	        URL url = new URL("https://saladocodigo.000webhostapp.com/logar.php");
+	        URL url = new URL(App._logar);
 
 			JSONArray dados = bd.Select(url, parametros);
-			JSONObject _tmp;
+			JSONObject _tmp = null;
 			
 			for(int i = 0; i <= dados.length(); i++) {
 				_tmp = (JSONObject) dados.get(i);
 				break;
 			}
-			return true;
 			
+			if(_tmp != null) {
+				
+				if(_tmp.has("error")) {
+					throw new Exception(_tmp.getString("error"));
+				}
+				
+				int    _id = Integer.parseInt(_tmp.getString("id"));
+				String _nick = _tmp.getString("nick");
+				String _nome = _tmp.getString("nome");
+				String _email = _tmp.getString("email");
+				String _telefone = _tmp.getString("telefone");
+				
+				Usuario _tempUsuario = new Usuario(_id,_nick,_email,_nome,_telefone,"");
+				_tempUsuario.setQtdSeguidores(_tmp.getString("qtdSeg"));
+				_tempUsuario.setQtdSeguindo(_tmp.getString("qtdSegd"));
+				App._usuario = _tempUsuario;
+				return true;
+			}else {
+				return false;
+			}
 		}catch(Exception e){
 			throw new Exception(e.getMessage());
 		}
