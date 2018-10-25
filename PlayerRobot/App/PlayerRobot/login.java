@@ -49,7 +49,7 @@ public class login extends JFrame {
 	}
 
 	/**
-	 * CREATE THE FRAME.
+	 * Create the frame.
 	 */
 	public login() {
 		setResizable(false);
@@ -102,9 +102,6 @@ public class login extends JFrame {
 		imgload.setIcon(new ImageIcon(imag));
 		imgload.setVisible(false);
 		contentPane.add(imgload);
-		
-		
-		
 		
 		
 		btnClose.setBackground(new Color(23,23,23));

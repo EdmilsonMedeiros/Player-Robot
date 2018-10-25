@@ -25,6 +25,10 @@ import java.awt.Label;
 import javax.swing.JTextField;
 import java.awt.Font;
 import Static.App;
+import Functions.AtualizarSeguidores;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class JMain extends JFrame {
 
@@ -132,9 +136,21 @@ public class JMain extends JFrame {
 		body.setLayout(new CardLayout(0, 0));
 		Main.add(body);
 		
-		JLabel bodyHome = new JLabel("");
-		body.add(bodyHome, "body");
-		bodyHome.setIcon(new ImageIcon(JMain.class.getResource("/Libraries/img/main.png")));
+		JPanel home = new JPanel();
+		home.setLayout(null);
+		home.setBorder(null);
+		body.add(home, "home");
+		
+		JPanel home_1 = new JPanel();
+		home_1.setLayout(null);
+		home_1.setBorder(null);
+		home_1.setBounds(0, 0, 840, 487);
+		home.add(home_1);
+		
+		JLabel label_8 = new JLabel("");
+		label_8.setIcon(new ImageIcon(JMain.class.getResource("/Libraries/img/main.png")));
+		label_8.setBounds(0, 0, 840, 486);
+		home_1.add(label_8);
 		
 		JPanel Perfil = new JPanel();
 		body.add(Perfil,"perfil");
@@ -147,14 +163,14 @@ public class JMain extends JFrame {
 		Perfil_body.setLayout(null);
 		Perfil_body.setBorder(null);
 		
-		JLabel qtsSeguindo = new JLabel(App._usuario.getQtdSeguindo());
+		JLabel qtsSeguindo = new JLabel("");
 		qtsSeguindo.setHorizontalAlignment(SwingConstants.CENTER);
 		qtsSeguindo.setForeground(Color.WHITE);
 		qtsSeguindo.setFont(new Font("Tahoma", Font.BOLD, 18));
 		qtsSeguindo.setBounds(290, 206, 86, 22);
 		Perfil_body.add(qtsSeguindo);
 		
-		JLabel qtdSeguidores = new JLabel(App._usuario.getQtdSeguidores());
+		JLabel qtdSeguidores = new JLabel("");
 		qtdSeguidores.setHorizontalAlignment(SwingConstants.CENTER);
 		qtdSeguidores.setForeground(Color.WHITE);
 		qtdSeguidores.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -173,6 +189,42 @@ public class JMain extends JFrame {
 		label_1.setBounds(0, 0, 840, 486);
 		Perfil_body.add(label_1);
 		
+		JPanel search = new JPanel();
+		search.setLayout(null);
+		search.setBorder(null);
+		body.add(search, "search");
+		
+		JPanel search_1 = new JPanel();
+		search_1.setLayout(null);
+		search_1.setBorder(null);
+		search_1.setBounds(0, 0, 840, 487);
+		search.add(search_1);
+		
+		JLabel label = new JLabel("");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Tahoma", Font.BOLD, 18));
+		label.setBounds(290, 206, 86, 22);
+		search_1.add(label);
+		
+		JLabel label_2 = new JLabel("");
+		label_2.setHorizontalAlignment(SwingConstants.CENTER);
+		label_2.setForeground(Color.WHITE);
+		label_2.setFont(new Font("Tahoma", Font.BOLD, 18));
+		label_2.setBounds(467, 206, 86, 22);
+		search_1.add(label_2);
+		
+		JLabel label_3 = new JLabel((String) null);
+		label_3.setHorizontalAlignment(SwingConstants.CENTER);
+		label_3.setForeground(Color.WHITE);
+		label_3.setFont(new Font("Tahoma", Font.BOLD, 18));
+		label_3.setBounds(334, 145, 171, 22);
+		search_1.add(label_3);
+		
+		JLabel label_4 = new JLabel("");
+		label_4.setBounds(0, 0, 840, 486);
+		search_1.add(label_4);
+		
 		Panel Footer = new Panel();
 		Footer.setBounds(0, 519, 840, 41);
 		Main.add(Footer);
@@ -190,9 +242,118 @@ public class JMain extends JFrame {
 		btnPerfil.setIcon(new ImageIcon(imagp));
 		Footer.add(btnPerfil);
 		
+		JButton btnSearch = new JButton("");
+		btnSearch.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				CardLayout c = (CardLayout) (body.getLayout());
+				c.show(body, "search");
+			}
+		});
+		btnSearch.setToolTipText("Seu perfil");
+		btnSearch.setBorderPainted(false);
+		btnSearch.setBorder(null);
+		btnSearch.setAlignmentX(0.5f);
+		btnSearch.setBounds(735, 2, 40, 40);
+		ImageIcon imgsearch = new ImageIcon(login.class.getResource("/Libraries/img/btnsearch.png"));
+		Image imagSearch = imgsearch.getImage().getScaledInstance(btnSearch.getWidth(), btnSearch.getHeight(), Image.SCALE_SMOOTH);
+		btnSearch.setIcon(new ImageIcon(imagSearch));
+		Footer.add(btnSearch);
+		
+		JButton btnMain = new JButton("");
+		btnMain.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				CardLayout c = (CardLayout)(body.getLayout());
+				c.show(body,"home");
+			}
+		});
+		btnMain.setToolTipText("Seu perfil");
+		btnMain.setBorderPainted(false);
+		btnMain.setBorder(null);
+		btnMain.setAlignmentX(0.5f);
+		btnMain.setBounds(685, 2, 40, 40);
+		ImageIcon imgmain = new ImageIcon(login.class.getResource("/Libraries/img/btnmain.png"));
+		Image imagMain = imgmain.getImage().getScaledInstance(btnMain.getWidth(), btnMain.getHeight(), Image.SCALE_SMOOTH);
+		btnMain.setIcon(new ImageIcon(imagMain));
+		Footer.add(btnMain);
+		
+		JSlider slider = new JSlider();
+		slider.setValue(0);
+		slider.setBackground(new Color(27,27,27));
+		slider.setBounds(100, 13, 307, 19);
+		Footer.add(slider);
+		
+		JButton btnPlayer = new JButton("");
+		btnPlayer.setToolTipText("Esse você escolheu");
+		btnPlayer.setBorderPainted(false);
+		btnPlayer.setBorder(null);
+		btnPlayer.setAlignmentX(0.5f);
+		btnPlayer.setBounds(10, 2, 40, 40);
+		ImageIcon imgplay = new ImageIcon(login.class.getResource("/Libraries/img/btnplayer.png"));
+		Image imagPlay = imgplay.getImage().getScaledInstance(btnPlayer.getWidth(), btnPlayer.getHeight(), Image.SCALE_SMOOTH);
+		btnPlayer.setIcon(new ImageIcon(imagPlay));
+		Footer.add(btnPlayer);
+		
+		JButton btnVolume = new JButton("");
+		btnVolume.setToolTipText("Volume");
+		btnVolume.setBorderPainted(false);
+		btnVolume.setBorder(null);
+		btnVolume.setAlignmentX(0.5f);
+		btnVolume.setBounds(417, 2, 40, 40);
+		ImageIcon imgvolume = new ImageIcon(login.class.getResource("/Libraries/img/volumeon.png"));
+		Image imagVolume = imgvolume.getImage().getScaledInstance(btnSearch.getWidth(), btnSearch.getHeight(), Image.SCALE_SMOOTH);
+		btnVolume.setIcon(new ImageIcon(imagVolume));
+		Footer.add(btnVolume);
+		
+		JSlider Volumebar = new JSlider();
+		Volumebar.setValue(100);
+		Volumebar.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				
+				if(Volumebar.getValue() == 0) {
+					ImageIcon imgvolume = new ImageIcon(login.class.getResource("/Libraries/img/volumeoff.png"));
+					Image imagVolume = imgvolume.getImage().getScaledInstance(btnSearch.getWidth(), btnSearch.getHeight(), Image.SCALE_SMOOTH);
+					btnVolume.setIcon(new ImageIcon(imagVolume));
+				}else if(Volumebar.getValue() < 50) {
+					ImageIcon imgvolume = new ImageIcon(login.class.getResource("/Libraries/img/volumeonMed.png"));
+					Image imagVolume = imgvolume.getImage().getScaledInstance(btnSearch.getWidth(), btnSearch.getHeight(), Image.SCALE_SMOOTH);
+					btnVolume.setIcon(new ImageIcon(imagVolume));
+				}else {
+					ImageIcon imgvolume = new ImageIcon(login.class.getResource("/Libraries/img/volumeon.png"));
+					Image imagVolume = imgvolume.getImage().getScaledInstance(btnSearch.getWidth(), btnSearch.getHeight(), Image.SCALE_SMOOTH);
+					btnVolume.setIcon(new ImageIcon(imagVolume));
+				}
+				
+			}
+		});
+		Volumebar.setBackground(new Color(27,27,27));
+		Volumebar.setBounds(464, 13, 128, 19);
+		Footer.add(Volumebar);
+		
+		JButton button_1 = new JButton("");
+		button_1.setToolTipText("Seu perfil");
+		button_1.setBorderPainted(false);
+		button_1.setBorder(null);
+		button_1.setAlignmentX(0.5f);
+		button_1.setBounds(55, 2, 40, 40);
+		Footer.add(button_1);
+		
 		btnPerfil.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				AtualizarSeguidores seguidores = new AtualizarSeguidores();
+				
+				try {
+					if(seguidores.atualizar()) {
+						qtsSeguindo.setText(App._usuario.getQtdSeguindo());
+						qtdSeguidores.setText(App._usuario.getQtdSeguidores());
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println(e.getMessage());
+				}
+				
 				CardLayout c = (CardLayout)(body.getLayout());
 				c.show(body, "perfil");
 			}

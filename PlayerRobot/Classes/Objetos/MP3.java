@@ -12,9 +12,9 @@ public class MP3 {
 	public void reprodutor(){
 
 		FileInputStream in;
-		//TRATAMENTO DE ERRO
+		//tratamento de erro
 		try {
-		//INICIALIZA O FILEUPSTREAM COM O ENDEREÇO DO ARQUIVO PARA REPRODUZIR
+		//Inicializa o FileInputStream com o endereço do arquivo para tocar
 		in = new FileInputStream("Libraries/03 Nossa Canção (feat. Leonardo Gonçalves) [Ao Vivo].mp3");
 
 		//Cria uma instancia da classe player passando para ele o InpuStream do arquivo

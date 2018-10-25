@@ -9,13 +9,12 @@ import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class Mysql {
+import com.google.gson.Gson;
 
-	//CLASSE ANTIGA
-	//Classe Responsavel por enviar por um HashMap os parametros, pois o metodo é POST de conexao
-	//E Retornar Independente dos dados um JsonArray
-	
-	public JSONArray Select(URL url, HashMap<String, Object> parametros) throws Exception {
+
+public class ServerMysql {
+
+	public String Executa(URL url, HashMap<String, Object> parametros) throws Exception {
 		
 		try {
 			
@@ -38,8 +37,6 @@ public class Mysql {
 	        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 	        conn.setDoOutput(true);
 	        conn.setDoInput(true);
-	       
-
 
 	        conn.getOutputStream().write(postDataBytes);
 	        
@@ -49,13 +46,16 @@ public class Mysql {
 	            sb.append((char) c);
 	        }
 	        
+	        JSONObject temp = new JSONObject(sb.toString());
 	        
-	        JSONArray array = new JSONArray(sb.toString());
-	        return array;
+	        if(temp.has("error")) {
+				throw new Exception(temp.getString("error"));
+			}
+	        return sb.toString();
 	        
 			
 		}catch(Exception e) {
-			throw new Exception("Erro na pesquisa "+e.getMessage());
+			throw new Exception(e.getMessage());
 		}
 		
 	}

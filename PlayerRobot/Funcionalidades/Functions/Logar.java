@@ -7,50 +7,54 @@ import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import BancodeDados.Mysql;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import BancodeDados.ServerMysql;
+import BancodeDados.MysqlDAO;
 
 public class Logar {
 
-	private Mysql bd = new Mysql();
+	private ServerMysql bd = new ServerMysql();
 	
 	public boolean start(String email, String senha) throws Exception {
 		try {
+			Usuario _tempUsuario = new Usuario();
 			
 			HashMap<String,Object> parametros = new HashMap<String,Object>();
 			parametros.put("email", email);
 			parametros.put("senha", senha);
 			
 	        URL url = new URL(App._logar);
-
-			JSONArray dados = bd.Select(url, parametros);
-			JSONObject _tmp = null;
-			
-			for(int i = 0; i <= dados.length(); i++) {
-				_tmp = (JSONObject) dados.get(i);
-				break;
-			}
-			
-			if(_tmp != null) {
-				
-				if(_tmp.has("error")) {
-					throw new Exception(_tmp.getString("error"));
-				}
-				
-				int    _id = Integer.parseInt(_tmp.getString("id"));
-				String _nick = _tmp.getString("nick");
-				String _nome = _tmp.getString("nome");
-				String _email = _tmp.getString("email");
-				String _telefone = _tmp.getString("telefone");
-				
-				Usuario _tempUsuario = new Usuario(_id,_nick,_email,_nome,_telefone,"");
-				_tempUsuario.setQtdSeguidores(_tmp.getString("qtdSeg"));
-				_tempUsuario.setQtdSeguindo(_tmp.getString("qtdSegd"));
-				App._usuario = _tempUsuario;
+	        _tempUsuario = (Usuario) Autenticar(url, parametros);
+	        
+	        if(_tempUsuario != null) {
+	        	App._usuario = _tempUsuario;
 				return true;
-			}else {
-				return false;
-			}
+	        }else {
+	        	return false;
+	        }
+	        
 		}catch(Exception e){
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	
+	public Usuario Autenticar(URL url, HashMap<String, Object> parametros) throws Exception {
+		
+		try {
+			ServerMysql mysql = new ServerMysql();
+			Usuario _usuario = new Usuario();
+			Gson gson = new Gson();
+			
+			java.lang.reflect.Type usuarioType = new TypeToken<Usuario>() {}.getType();
+			
+			String resultado = mysql.Executa(url, parametros);
+			_usuario = gson.fromJson(resultado, usuarioType);
+			return _usuario;
+			
+		}catch(Exception e) {
 			throw new Exception(e.getMessage());
 		}
 	}

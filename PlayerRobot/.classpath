@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="Libraries/java-json.jar"/>
 	<classpathentry kind="lib" path="Libraries/jl1.0.1.jar"/>
 	<classpathentry kind="lib" path="Libraries/img-login.jar"/>
+	<classpathentry kind="lib" path="Libraries/gson-2.8.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
