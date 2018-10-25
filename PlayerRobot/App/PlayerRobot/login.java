@@ -49,7 +49,7 @@ public class login extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * CREATE THE FRAME.
 	 */
 	public login() {
 		setResizable(false);

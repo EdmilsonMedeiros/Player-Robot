@@ -15,7 +15,7 @@ public class Mysql {
 		
 		try {
 			
-			//Preparar Parametros POST
+			//PREPARAR PARAMETROS POST
 			StringBuilder postData = new StringBuilder();
 	        for(HashMap.Entry<String,Object> param : parametros.entrySet()){
 	            if(postData.length() >= 0){
