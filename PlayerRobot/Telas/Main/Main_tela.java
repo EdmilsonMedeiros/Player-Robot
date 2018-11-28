@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 
 import Botaos.BotaoMusica;
 import Botaos.BotaoPerfil;
@@ -22,9 +23,13 @@ import PR_Musica.Musica;
 import PR_PlayerControle.PlayerControle;
 import PR_TimeLifeApp.TimeLifeApp;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -34,6 +39,7 @@ import java.awt.Dimension;
 public class Main_tela {
 
 	public JFrame frame;
+	private JPanel Body;
 	private JPanel MenuMusicas;
 	private Footer footer = new Footer();
 	PlayerControle pc = new PlayerControle();
@@ -97,7 +103,7 @@ public class Main_tela {
 		});
 		frame.getContentPane().add(nav);
 
-		JPanel Body = new JPanel();
+		Body = new JPanel();
 		Body.setBounds(0, 37, 840, 483);
 		Body.setBackground(new Color(28,28,28));
 		Body.setLayout(new CardLayout(0, 0));
@@ -117,6 +123,8 @@ public class Main_tela {
 		MenuMusicas.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		MenuMusicas.setBounds(10, 23, 820, 449);
 		MenuMusicas.setBackground(new Color(23,23,23));
+		
+		
 		MenuMusicas.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		Main.add(MenuMusicas);
 				
@@ -124,10 +132,7 @@ public class Main_tela {
 		Main_body.setBounds(0, 0, 840, 560);
 		Main.add(Main_body);
 		Main_body.setIcon(new ImageIcon(Main_tela.class.getResource("/Libraries/img/main.png")));
-		
-		UsuarioPerfil perfil = new UsuarioPerfil(TimeLifeApp._usuario);
-		Body.add(perfil,"perfil");
-		
+				
 		//Panel Footer = new Panel();
 		footer.setBounds(0, 519, 840, 41);
 		frame.getContentPane().add(footer);
@@ -142,16 +147,18 @@ public class Main_tela {
 		
 		btnPerfil.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) 
+			public void mouseClicked(MouseEvent me) 
 			{	
 				try 
 				{
-					MetodosUsuarioController  muc = new MetodosUsuarioController();
-					muc.AtualizarSeguidores(TimeLifeApp._usuario.getId());
-					muc.PegarPlayListFavoritos(TimeLifeApp._usuario.getId());
+					UsuarioPerfil perfil = new UsuarioPerfil(TimeLifeApp._usuario);;
+					Body.add(perfil,"perfil");
 					
-					CardLayout c = (CardLayout)(Body.getLayout());
-					c.show(Body, "perfil");
+						MetodosUsuarioController  muc = new MetodosUsuarioController();
+						muc.AtualizarSeguidores(TimeLifeApp._usuario.getId());
+						muc.PegarPlayListFavoritos(TimeLifeApp._usuario.getId());
+						CardLayout c = (CardLayout)(Body.getLayout());
+						c.show(Body, "perfil");
 				}catch(Exception e)
 				{
 					JOptionPane.showMessageDialog(null, e.getMessage());
@@ -159,7 +166,6 @@ public class Main_tela {
 			}
 		});
 		
-
 		JButton btnMain = new JButton();
 		btnMain.setToolTipText("Seu perfil");
 		btnMain.setBorderPainted(false);
@@ -204,12 +210,52 @@ public class Main_tela {
 				
 				btnMusica.addMouseListener(new MouseAdapter() {
 					@Override
-					public void mouseClicked(MouseEvent arg0) {
+					public void mouseClicked(MouseEvent me) {
 						PegarMP3Servidor getMP3 = new PegarMP3Servidor(); 
 						try {
+							if ((me.getModifiers() & MouseEvent.BUTTON3_MASK) != 0) {
+								
+								JPopupMenu MenuMusica = new JPopupMenu();
+								addPopup(MenuMusicas, MenuMusica);
+								
+								JMenuItem mntmTocar = new JMenuItem("Tocar");
+								MenuMusica.add(mntmTocar);
+								
+								JMenuItem mntmFavoritar = new JMenuItem("Favoritar");
+								MenuMusica.add(mntmFavoritar);
+								
+								mntmTocar.addActionListener(new ActionListener() {
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										try {
+											ms.setArquivoMP3(getMP3.getMP3DoServidor(ms.getCodigoMp3Servidor()));
+											TimeLifeApp._playercontrol.addMusica(ms);
+											TimeLifeApp._playercontrol.play();
+										} catch (Exception e1) {
+											JOptionPane.showMessageDialog(null, e1.getMessage());
+										}
+										}
+								});
+								
+								
+								mntmFavoritar.addActionListener(new ActionListener(){
+									public void actionPerformed(ActionEvent ae) {
+										MetodosUsuarioController cmd = new MetodosUsuarioController();
+										try {
+											cmd.FavoritarMusica(ms.getId(), TimeLifeApp._usuario.getFavorito().getId());
+										} catch (Exception e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+									}
+								});
+								MenuMusica.show(btnMusica, me.getX(), me.getY());
+							}else 
+							{
 								ms.setArquivoMP3(getMP3.getMP3DoServidor(ms.getCodigoMp3Servidor()));
 								TimeLifeApp._playercontrol.addMusica(ms);
-								TimeLifeApp._playercontrol.play();
+								TimeLifeApp._playercontrol.play();	
+							}
 						} catch (Exception e) {
 							JOptionPane.showMessageDialog(null, e.getMessage());
 						}
@@ -222,5 +268,22 @@ public class Main_tela {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
 		
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }

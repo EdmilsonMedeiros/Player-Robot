@@ -17,4 +17,5 @@ public class TimeLifeApp {
 	public static String _ReceberTodasAsMusicas  = "https://saladocodigo.000webhostapp.com/Funcionalidades/Sistema/getMusicasShow.php";
 	public static String _PlayListFavoritos      = "https://saladocodigo.000webhostapp.com/Funcionalidades/Sistema/Metodos_Playlist/getFavoritePlayList.php";
 	public static String _CadastrarUsuario       = "https://saladocodigo.000webhostapp.com/Funcionalidades/Sistema/cadastrarUsuario.php";
+	public static String _FavoritarMusica 		 = "https://saladocodigo.000webhostapp.com/Funcionalidades/Sistema/Metodos_Playlist/AdicionarMusicaPlayList.php";
 }

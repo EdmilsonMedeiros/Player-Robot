@@ -24,25 +24,27 @@ public class BotaoPlayPause extends JButton {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				if (tocando) {
-					tocando = false;
-					MudarImagem(false);
-					TimeLifeApp._playercontrol.PararMusica();
-					p.pause();
-				} else {
-					tocando = true;
-					MudarImagem(true);
-					try {
-						int pausado = TimeLifeApp._playercontrol.musica.getCurrentFrame();
-						TimeLifeApp._playercontrol.Play(pausado);
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+				if(TimeLifeApp._playercontrol.possuiMusica()) 
+				{
+					if (tocando) {
+						tocando = false;
+						MudarImagem(false);
+						TimeLifeApp._playercontrol.PararMusica();
+						p.pause();
+					} else {
+						tocando = true;
+						MudarImagem(true);
+						try {
+							int pausado = TimeLifeApp._playercontrol.musica.getCurrentFrame();
+							TimeLifeApp._playercontrol.Play(pausado);
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						p.run();
 					}
-					p.run();
 				}
-
+				
 			}
 		});
 		this.setMnemonic(KeyEvent.VK_P);

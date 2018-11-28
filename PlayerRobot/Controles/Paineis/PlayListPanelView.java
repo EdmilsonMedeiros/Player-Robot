@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import PR_Musica.Musica;
 import PR_Musica.PlayList;
 import PR_TimeLifeApp.TimeLifeApp;
+import Tables.Modelo_PlayList;
 
 import java.awt.Font;
 import java.awt.Frame;
@@ -30,8 +31,15 @@ import PR_Metodos_PlayList.ExecutaPlayList;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.SystemColor;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.UIManager;
 
 public class PlayListPanelView extends JPanel {
+	private JTable table;
 	
 public PlayListPanelView(PlayList pl) 
 	{
@@ -53,8 +61,31 @@ public PlayListPanelView(PlayList pl)
 				}
 			}
 		});
+
+		Modelo_PlayList modelplaylist = new Modelo_PlayList(pl.getMusicas());
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBorder(new LineBorder(new Color(23,23,23)));
+		scrollPane.setBounds(128, 222, 616, 233);
+		scrollPane.getViewport().setBackground(new Color(23,23,23));
+		add(scrollPane);
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		table.setSelectionBackground(new Color(169, 169, 169));
+		table.setFont(new Font("Tahoma", Font.BOLD, 13));
+		table.setForeground(Color.WHITE);
+		table.setRowHeight(30);
+		table.getTableHeader().setBorder(new LineBorder(new Color(23, 23, 23)));
+		table.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
+		table.getTableHeader().setForeground(Color.WHITE);
+		table.getTableHeader().setBackground(Color.BLACK);
+		table.setAutoCreateRowSorter(true);
+		table.setBackground(new Color(23,23,23));
+		table.setModel(modelplaylist);
 		add(btnVoltar);
 		
+//		/	
+				
 		JButton btnTocarPlaylist = new JButton("TOCAR PLAYLIST");
 		btnTocarPlaylist.setOpaque(false);
 		btnTocarPlaylist.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -83,37 +114,6 @@ public PlayListPanelView(PlayList pl)
 			}
 		});
 		add(btnTocarPlaylist);
-		
-		
-		JPanel todasMusicas = new JPanel();
-		todasMusicas.setForeground(Color.WHITE);
-		todasMusicas.setAutoscrolls(true);
-		todasMusicas.setBounds(126, 209, 601, 23);
-		todasMusicas.setLayout(new GridLayout(1, 3, 0, 0));
-		todasMusicas.setBackground(SystemColor.activeCaptionText);
-		add(todasMusicas);
-		
-		JLabel txtTitulo = new JLabel("Titulo");
-		txtTitulo.setFont(new Font("Tahoma", Font.BOLD, 11));
-		txtTitulo.setForeground(Color.WHITE);
-		todasMusicas.add(txtTitulo);
-		txtTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		txtTitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
-		JLabel txtArtista = new JLabel("Artista");
-		txtArtista.setFont(new Font("Tahoma", Font.BOLD, 11));
-		txtArtista.setForeground(Color.WHITE);
-		txtArtista.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		txtArtista.setBounds(new Rectangle(0, 0, 30, 0));
-		txtArtista.setHorizontalAlignment(SwingConstants.CENTER);
-		txtArtista.setAlignmentX(Component.CENTER_ALIGNMENT);
-		todasMusicas.add(txtArtista);
-		
-		JLabel txtAlbum = new JLabel("\u00C1lbum");
-		txtAlbum.setFont(new Font("Tahoma", Font.BOLD, 11));
-		txtAlbum.setForeground(Color.WHITE);
-		txtAlbum.setHorizontalAlignment(SwingConstants.CENTER);
-		todasMusicas.add(txtAlbum);
 		
 		
 		

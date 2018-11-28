@@ -204,19 +204,14 @@ public class LoginCadastro_tela {
 		CadtxtUsuario.setBounds(426, 217, 361, 32);
 		cadastrar.add(CadtxtUsuario);
 		
-		JTextField CadtxtNome = new JTextField();
-		CadtxtNome.setFont(new Font("Tahoma", Font.BOLD, 16));
-		CadtxtNome.setBorder(null);
-		CadtxtNome.setHorizontalAlignment(SwingConstants.CENTER);
-		CadtxtNome.setBackground(new Color(28, 28, 28));
-		CadtxtNome.setBounds(426, 157, 361, 32);
-		CadtxtNome.setColumns(10);
-		cadastrar.add(CadtxtNome);
-		
-		JLabel wallpaper2 = new JLabel("");
-		wallpaper2.setIcon(new ImageIcon(LoginCadastro_tela.class.getResource("/Libraries/img/telaCadastro.png")));
-		wallpaper2.setBounds(0, 0, 834, 560);
-		cadastrar.add(wallpaper2);
+		CadtxtSenha = new JPasswordField();
+		CadtxtSenha.setHorizontalAlignment(SwingConstants.CENTER);
+		CadtxtSenha.setFont(new Font("Tahoma", Font.BOLD, 16));
+		CadtxtSenha.setColumns(10);
+		CadtxtSenha.setBorder(null);
+		CadtxtSenha.setBackground(new Color(28, 28, 28));
+		CadtxtSenha.setBounds(426, 349, 361, 32);
+		cadastrar.add(CadtxtSenha);
 		
 		CadtxtEmail = new JTextField();
 		CadtxtEmail.setHorizontalAlignment(SwingConstants.CENTER);
@@ -227,14 +222,56 @@ public class LoginCadastro_tela {
 		CadtxtEmail.setBounds(426, 278, 361, 32);
 		cadastrar.add(CadtxtEmail);
 		
-		CadtxtSenha = new JPasswordField();
-		CadtxtSenha.setHorizontalAlignment(SwingConstants.CENTER);
-		CadtxtSenha.setFont(new Font("Tahoma", Font.BOLD, 16));
-		CadtxtSenha.setColumns(10);
-		CadtxtSenha.setBorder(null);
-		CadtxtSenha.setBackground(new Color(28, 28, 28));
-		CadtxtSenha.setBounds(426, 349, 361, 32);
-		cadastrar.add(CadtxtSenha);
+		JTextField CadtxtNome = new JTextField();
+		CadtxtNome.setFont(new Font("Tahoma", Font.BOLD, 16));
+		CadtxtNome.setBorder(null);
+		CadtxtNome.setHorizontalAlignment(SwingConstants.CENTER);
+		CadtxtNome.setBackground(new Color(28, 28, 28));
+		CadtxtNome.setBounds(426, 157, 361, 32);
+		CadtxtNome.setColumns(10);
+		cadastrar.add(CadtxtNome);
+		
+		JButton btnCadastrarc = new JButton("Cadastrar");
+		btnCadastrarc.setForeground(SystemColor.desktop);
+		btnCadastrarc.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnCadastrarc.setBorderPainted(false);
+		btnCadastrarc.setBorder(null);
+		btnCadastrarc.setBackground(SystemColor.inactiveCaptionBorder);
+		btnCadastrarc.setAlignmentX(0.5f);
+		btnCadastrarc.setBounds(618, 432, 177, 41);
+		cadastrar.add(btnCadastrarc);
+		
+		btnCadastrarc.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				try {
+					
+					CadastrarUsuario cu = new CadastrarUsuario();
+					JOptionPane.showMessageDialog(null, cu.Cadastrar(CadtxtNome.getText(),CadtxtUsuario.getText(),CadtxtEmail.getText(),CadtxtSenha.getText()));
+					if(JOptionPane.OK_OPTION == 0) {
+						CadtxtNome.setText("");
+						CadtxtEmail.setText("");
+						CadtxtUsuario.setText("");
+						CadtxtEmail.setText("");
+						CadtxtSenha.setText("");
+						CardLayout c = (CardLayout)(panels.getLayout());
+						c.show(panels, "login");
+					}
+					
+				}catch(Exception e) 
+				{
+					JOptionPane.showMessageDialog(null, e.getMessage());
+					if(JOptionPane.OK_OPTION == 0) {
+						CadtxtNome.setText("");
+						CadtxtEmail.setText("");
+						CadtxtUsuario.setText("");
+						CadtxtEmail.setText("");
+						CadtxtSenha.setText("");
+					}
+				}
+			}
+		});
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -258,45 +295,10 @@ public class LoginCadastro_tela {
 			}
 		});
 		
-		JButton btnCadastrarc = new JButton("Cadastrar");
-		btnCadastrarc.setForeground(new Color(240, 248, 255));
-		btnCadastrarc.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnCadastrarc.setBorderPainted(false);
-		btnCadastrarc.setBorder(null);
-		btnCadastrarc.setBackground(SystemColor.inactiveCaptionBorder);
-		btnCadastrarc.setAlignmentX(0.5f);
-		btnCadastrarc.setBounds(618, 432, 177, 41);
-		cadastrar.add(btnCadastrarc);
-		
-		btnCadastrarc.addMouseListener(new MouseAdapter() {
-			
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				try {
-					
-					CadastrarUsuario cu = new CadastrarUsuario();
-					JOptionPane.showMessageDialog(null, cu.Cadastrar(CadtxtNome.getText(),CadtxtUsuario.getText(),CadtxtEmail.getText(),CadtxtSenha.getText()));
-					if(JOptionPane.OK_OPTION == 0) {
-						CadtxtNome.setText("");
-						CadtxtEmail.setText("");
-						CadtxtUsuario.setText("");
-						CadtxtEmail.setText("");
-						CadtxtSenha.setText("");
-					}
-					
-				}catch(Exception e) 
-				{
-					JOptionPane.showMessageDialog(null, e.getMessage());
-					if(JOptionPane.OK_OPTION == 0) {
-						CadtxtNome.setText("");
-						CadtxtEmail.setText("");
-						CadtxtUsuario.setText("");
-						CadtxtEmail.setText("");
-						CadtxtSenha.setText("");
-					}
-				}
-			}
-		});
+		JLabel wallpaper2 = new JLabel("");
+		wallpaper2.setIcon(new ImageIcon(LoginCadastro_tela.class.getResource("/Libraries/img/telaCadastro.png")));
+		wallpaper2.setBounds(0, 0, 834, 560);
+		cadastrar.add(wallpaper2);
 		
 		
 

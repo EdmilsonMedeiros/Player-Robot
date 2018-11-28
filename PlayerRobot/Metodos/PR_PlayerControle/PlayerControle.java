@@ -13,6 +13,9 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.UnsupportedTagException;
+
 import PR_Metodos_Musica.PegarMP3Servidor;
 import PR_Musica.Musica;
 import PR_Musica.PlayList;
@@ -35,9 +38,21 @@ public class PlayerControle  extends PlaybackListener implements Runnable {
 	private int 		   number;
 	public  int            tempo;
 	
+	private FileInputStream mp3;
+	
 	public PlayerControle() {}
 	
 	public void addMusica(Musica ms) throws Exception {
+		if(possuiMusica()) {
+			if(ms.getId() != musica.getId()) 
+			{
+				if(this.musica != null) 
+				{
+					this.DeletarArquivoMusica();
+				}
+			}
+		}
+		
 		this.musica = ms;
 	}
 	public boolean possuiMusica() {
@@ -45,7 +60,20 @@ public class PlayerControle  extends PlaybackListener implements Runnable {
 			return true;
 		}
 		return false;
+		
 	}
+	
+	public void DeletarArquivoMusica() 
+	{
+		try {
+			this.mp3.close();
+			musica.getArquivoMP3().delete();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void addPlayList(PlayList pl) throws Exception {
 		this.playlist = pl;
 		this.tocandoplaylist = true;
@@ -58,7 +86,7 @@ public class PlayerControle  extends PlaybackListener implements Runnable {
 		this.musicaTocando = true;
 		try
 		{			
-			FileInputStream mp3 = new FileInputStream(musica.getArquivoMP3());
+			mp3 = new FileInputStream(musica.getArquivoMP3());
 			BufferedInputStream buffer = new BufferedInputStream(mp3);
 			this.player = new AdvancedPlayer(buffer);
 			this.player.setPlayBackListener(this);
@@ -83,7 +111,7 @@ public class PlayerControle  extends PlaybackListener implements Runnable {
 		this.inicioMusica = (int) (startmusica);
 		try
 		{
-			FileInputStream mp3 = new FileInputStream(musica.getArquivoMP3());
+			mp3 = new FileInputStream(musica.getArquivoMP3());
 			BufferedInputStream buffer = new BufferedInputStream(mp3);
 			this.player = new AdvancedPlayer(buffer);
 			this.player.setPlayBackListener(this);

@@ -3,7 +3,7 @@ package PR_Metodos_Usuario;
 import PR_Metodos_PlayList.PegarPlayListFavorito;
 import PR_Musica.PlayList;
 import PR_TimeLifeApp.TimeLifeApp;
-
+import PR_Metodos_PlayList.FavoritarMusica;
 public class MetodosUsuarioController {
 	
 	public boolean LogarUsuario(String usuario, String senha) throws Exception
@@ -31,7 +31,6 @@ public class MetodosUsuarioController {
 			throw new Exception(e.getMessage());
 		}
 	}
-	
 	public void PegarPlayListFavoritos(int id) throws Exception 
 	{
 		try 
@@ -40,6 +39,17 @@ public class MetodosUsuarioController {
 			TimeLifeApp._usuario.setFavorito(pplf.RetornarPlayListFavorito(id));
 						
 		}catch(Exception e)
+		{
+			throw new Exception(e.getMessage());
+		}
+	}
+	public void FavoritarMusica(int id, int playlistId) throws Exception
+	{
+		try 
+		{
+			FavoritarMusica fm = new FavoritarMusica();
+			fm.FavoritarMusica(id,playlistId);
+		}catch(Exception e) 
 		{
 			throw new Exception(e.getMessage());
 		}
