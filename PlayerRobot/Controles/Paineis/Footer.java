@@ -19,10 +19,14 @@ import Botaos.BotaoPlayPause;
 import Botaos.BotaoStop;
 import JSliders.LinhaDoTempo;
 import Main.Main_tela;
+import PR_Metodos_Musica.PegarMP3Servidor;
+import PR_Musica.Musica;
+import PR_Musica.PlayList;
 import PR_TimeLifeApp.TimeLifeApp;
 import java.awt.Font;
 
 public class Footer extends Panel {
+	private PegarMP3Servidor getMp3 = new PegarMP3Servidor();
 	private Timer		   contador;
 	private BotaoPlayPause btnPlayPause;
 	private BotaoStop      btnStop;
@@ -49,7 +53,12 @@ public class Footer extends Panel {
 				linhadoTempo.setPaintTrack(true);
 				tempoInicialMusica.setText(TimeLifeApp._playercontrol.musica.getCurrentTime());
 				tempoFinalMusica.setText(TimeLifeApp._playercontrol.musica.getTotalTime());
-				ContinuaTocando();
+				try {
+					ContinuaTocando();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		
@@ -81,7 +90,7 @@ public class Footer extends Panel {
 		btnStop.setAlignmentX(0.5f);
 		btnStop.setBounds(55, 2, 40, 40);
 		this.add(this.btnStop);
-	
+		
 	}
 	
 	public void run(){
@@ -105,11 +114,28 @@ public class Footer extends Panel {
 		this.contador.stop();
 	}
 	
-	public void ContinuaTocando(){
+	public void ContinuaTocando() throws Exception{
 		if(TimeLifeApp._playercontrol.musica.getCurrentFrame() == TimeLifeApp._playercontrol.musica.getMp3().getFrameCount()) 
 		{
+			contador.stop();
 			if(TimeLifeApp._playercontrol.continuarTocando == false) {
 				this.stop();
+				if(TimeLifeApp._playercontrol.tocandoplaylist)
+				{
+					for(Musica musica : TimeLifeApp._playercontrol.playlist.getMusicas()) 
+					{
+						if(musica.getId() != TimeLifeApp._playercontrol.musica.getId()) 
+						{
+							musica.setArquivoMP3(getMp3.getMP3DoServidor(musica.getCodigoMp3Servidor()));
+							TimeLifeApp._playercontrol.addMusica(musica);
+							TimeLifeApp._playercontrol.play();
+						}
+					}
+				}
+			}else
+			{
+				this.stop();
+				TimeLifeApp._playercontrol.play();
 			}
 		}
 	}

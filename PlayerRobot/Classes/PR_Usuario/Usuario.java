@@ -1,4 +1,7 @@
 package PR_Usuario;
+
+import PR_Musica.PlayList;
+
 ///
 /// CLASSE ABSTRATA USUARIO
 ///
@@ -15,7 +18,11 @@ public class Usuario {
 	//informações seguidoers
 	private String qtdSeguidores;
 	private String qtdSeguindo;
-		
+	
+	
+	//Informações da conta
+	private PlayList favorito;
+	
 	//Construtores da Classe
 	public Usuario() {}
 	public Usuario(int id, String nick, String email, String nome, String telefone, String lkFotos) {
@@ -76,5 +83,11 @@ public class Usuario {
 	}
 	public void setQtdSeguindo(String qtdSeguindo) {
 		this.qtdSeguindo = qtdSeguindo;
+	}
+	public PlayList getFavorito() {
+		return favorito;
+	}
+	public void setFavorito(PlayList favorito) {
+		this.favorito = favorito;
 	}
 }

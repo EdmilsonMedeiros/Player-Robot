@@ -1,5 +1,7 @@
 package PR_Metodos_Usuario;
 
+import PR_Metodos_PlayList.PegarPlayListFavorito;
+import PR_Musica.PlayList;
 import PR_TimeLifeApp.TimeLifeApp;
 
 public class MetodosUsuarioController {
@@ -9,7 +11,9 @@ public class MetodosUsuarioController {
 		try 
 		{
 			LogarNoSistema ln = new LogarNoSistema();
-			return ln.AutenticaUsuario(usuario, senha);
+			ln.AutenticaUsuario(usuario, senha);
+			this.PegarPlayListFavoritos(TimeLifeApp._usuario.getId());
+			return true;
 		}catch(Exception e) 
 		{
 			throw new Exception(e.getMessage());
@@ -22,6 +26,19 @@ public class MetodosUsuarioController {
 			AtualizarSeguidores as = new AtualizarSeguidores(id);
 			TimeLifeApp._usuario.setQtdSeguindo(as.getSeguindo());
 			TimeLifeApp._usuario.setQtdSeguidores(as.getSeguidores());
+		}catch(Exception e)
+		{
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	public void PegarPlayListFavoritos(int id) throws Exception 
+	{
+		try 
+		{
+			PegarPlayListFavorito pplf = new PegarPlayListFavorito();
+			TimeLifeApp._usuario.setFavorito(pplf.RetornarPlayListFavorito(id));
+						
 		}catch(Exception e)
 		{
 			throw new Exception(e.getMessage());

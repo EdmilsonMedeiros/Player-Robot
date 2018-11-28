@@ -55,13 +55,13 @@ public class ExecutaComandos {
 			throw new Exception(e.getMessage());
 		}
 	}
-	public void AdicionarParamentros(String Paramentro, Object Valor) throws Exception 
+	public void AdicionarParamentros(String Chave, Object Valor) throws Exception 
 	{
 		try 
 		{
-			parametros.put(Paramentro,Valor);	
+			parametros.put(Chave,Valor);	
 		}catch(Exception e) {
-			throw new Exception("Erro ao adicionar o paramentro: "+Paramentro);
+			throw new Exception("Erro ao adicionar o paramentro: "+Chave);
 		}
 	}
 }

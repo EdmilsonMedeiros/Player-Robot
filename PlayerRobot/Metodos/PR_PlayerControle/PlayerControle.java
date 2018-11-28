@@ -13,7 +13,9 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
+import PR_Metodos_Musica.PegarMP3Servidor;
 import PR_Musica.Musica;
+import PR_Musica.PlayList;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 import javazoom.jl.player.advanced.PlaybackListener;
 import PR_TimeLifeApp.TimeLifeApp;
@@ -22,16 +24,16 @@ import Paineis.Footer;
 public class PlayerControle  extends PlaybackListener implements Runnable {
 	
 	public  Musica 		   musica;
+	public  PlayList       playlist;
 	private AdvancedPlayer player;
 	private Thread 		   playerThread;
 	private int 	       inicioMusica;
 	private int 		   finalMusica;
-	private boolean 	   musicaTocando;
+	public  boolean 	   musicaTocando;
 	public  boolean        continuarTocando;
+	public  boolean        tocandoplaylist;
 	private int 		   number;
 	public  int            tempo;
-	private Footer         footer;
-	
 	
 	public PlayerControle() {}
 	
@@ -43,6 +45,10 @@ public class PlayerControle  extends PlaybackListener implements Runnable {
 			return true;
 		}
 		return false;
+	}
+	public void addPlayList(PlayList pl) throws Exception {
+		this.playlist = pl;
+		this.tocandoplaylist = true;
 	}
 	public void play() throws Exception {
 		this.number = 1;
@@ -65,7 +71,6 @@ public class PlayerControle  extends PlaybackListener implements Runnable {
 			//e.printStackTrace();
 		}
 	}
-	
 	
 	public void Play(int startmusica) throws Exception{
 		this.number = 2;
@@ -114,10 +119,6 @@ public class PlayerControle  extends PlaybackListener implements Runnable {
 			throw new Exception(e.getMessage());
 		}
 	}
-	
-	
-	
-	
 	
 	public void PararMusica() {
 		this.player.close();

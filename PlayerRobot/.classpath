@@ -8,8 +8,8 @@
 	<classpathentry kind="src" path="Telas"/>
 	<classpathentry kind="lib" path="src/mp3agic-0.9.1.jar"/>
 	<classpathentry kind="lib" path="src/gson-2.8.1.jar"/>
-	<classpathentry kind="lib" path="src/img-login.jar"/>
 	<classpathentry kind="lib" path="src/java-json.jar"/>
 	<classpathentry kind="lib" path="src/jl1.0.1.jar"/>
+	<classpathentry kind="lib" path="src/img-login.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -5,7 +5,7 @@ import java.awt.FlowLayout;
 import javax.swing.JFrame;
 import Paineis.Footer;
 import Paineis.NavBar;
-import Paineis.Perfil;
+import Paineis.UsuarioPerfil;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -66,8 +66,9 @@ public class Main_tela {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * 
 	 */
-	private void initialize() {
+	private void initialize() throws Exception {
 		
 		TimeLifeApp._playercontrol = this.pc;
 		
@@ -114,7 +115,8 @@ public class Main_tela {
 		MenuMusicas = new JPanel();
 		MenuMusicas.setAutoscrolls(true);
 		MenuMusicas.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		MenuMusicas.setBounds(0, 53, 840, 130);
+		MenuMusicas.setBounds(10, 23, 820, 449);
+		MenuMusicas.setBackground(new Color(23,23,23));
 		MenuMusicas.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		Main.add(MenuMusicas);
 				
@@ -123,7 +125,7 @@ public class Main_tela {
 		Main.add(Main_body);
 		Main_body.setIcon(new ImageIcon(Main_tela.class.getResource("/Libraries/img/main.png")));
 		
-		Perfil perfil = new Perfil(TimeLifeApp._usuario);
+		UsuarioPerfil perfil = new UsuarioPerfil(TimeLifeApp._usuario);
 		Body.add(perfil,"perfil");
 		
 		//Panel Footer = new Panel();
@@ -146,6 +148,8 @@ public class Main_tela {
 				{
 					MetodosUsuarioController  muc = new MetodosUsuarioController();
 					muc.AtualizarSeguidores(TimeLifeApp._usuario.getId());
+					muc.PegarPlayListFavoritos(TimeLifeApp._usuario.getId());
+					
 					CardLayout c = (CardLayout)(Body.getLayout());
 					c.show(Body, "perfil");
 				}catch(Exception e)
@@ -154,6 +158,30 @@ public class Main_tela {
 				}
 			}
 		});
+		
+
+		JButton btnMain = new JButton();
+		btnMain.setToolTipText("Seu perfil");
+		btnMain.setBorderPainted(false);
+		btnMain.setBorder(null);
+		btnMain.setAlignmentX(0.5f);
+		btnMain.setBounds(685, 2, 40, 40);
+		ImageIcon imgmain = new ImageIcon(this.getClass().getResource("/Libraries/img/btnmain.png"));
+		btnMain.setIcon(imgmain);
+		TimeLifeApp._footer.add(btnMain);
+		
+		btnMain.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				CardLayout c = (CardLayout)(Body.getLayout());
+				c.show(Body,"main");
+			}
+			
+			public void teste() {}
+		});
+		
+		
+		
 	}
 	public void CarregarMusicas() throws Exception 
 	{
